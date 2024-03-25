@@ -7,9 +7,9 @@ import model.appointment.Template;
 import org.springframework.boot.autoconfigure.jms.JmsProperties;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +45,45 @@ public class TemplateController {
 
         return CollectionModel.of(templates, linkTo(methodOn(TemplateController.class).all()).withSelfRel());
     }
+
+    @PostMapping ("/templates")
+    public ResponseEntity<EntityModel<Template>> newTemplate(@RequestBody Template template){
+        Template newTemplate = templateRepository.save(template);
+        return ResponseEntity.
+                created(linkTo(methodOn(TemplateController.class).
+                        one(newTemplate.getId())).
+                        toUri()).
+                body(templateModelAssembler.toModel(newTemplate));
+    }
+
+    @DeleteMapping("templates/{id}")
+    public ResponseEntity<?> deleteTemplate(@PathVariable Long id){
+        templateRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("templates/{id}")
+    public ResponseEntity<?> replaceTemplate(@RequestBody Template newTemplate, @PathVariable Long id){
+
+        Template updatedTemplate = templateRepository.findById(id)
+                .map(template -> {
+                    template.setActive(newTemplate.isActive());
+                    template.setWeekday(newTemplate.getWeekday());
+                    template.setStartTime(newTemplate.getStartTime());
+                    return templateRepository.save(template);
+                })
+                .orElseGet(() -> {
+                    newTemplate.setId(id);
+                    return templateRepository.save(newTemplate);
+                });
+
+        EntityModel<Template> entityModel = templateModelAssembler.toModel(updatedTemplate);
+
+        return ResponseEntity
+                .created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri())
+                .body(entityModel);
+    }
+
 
 
 }

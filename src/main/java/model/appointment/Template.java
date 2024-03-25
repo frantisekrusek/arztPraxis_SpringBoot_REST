@@ -1,5 +1,6 @@
 package model.appointment;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Template {
     @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
     private DayOfWeek weekday;
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime startTime;
     //current appointments are to be generated from it?
     private boolean active;
