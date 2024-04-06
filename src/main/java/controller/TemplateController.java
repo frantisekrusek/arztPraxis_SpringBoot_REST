@@ -4,7 +4,6 @@ import assembler.TemplateModelAssembler;
 import database.TemplateRepository;
 import exceptions.TemplateNotFoundException;
 import model.appointment.Template;
-import org.springframework.boot.autoconfigure.jms.JmsProperties;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -23,7 +22,7 @@ public class TemplateController {
     private final TemplateRepository templateRepository;
     private final TemplateModelAssembler templateModelAssembler;
 
-    TemplateController (TemplateRepository templateRepository, TemplateModelAssembler templateModelAssembler){
+    public TemplateController (TemplateRepository templateRepository, TemplateModelAssembler templateModelAssembler){
         this.templateRepository = templateRepository;
         this.templateModelAssembler = templateModelAssembler;
     }
@@ -58,6 +57,7 @@ public class TemplateController {
 
     @DeleteMapping("templates/{id}")
     public ResponseEntity<?> deleteTemplate(@PathVariable Long id){
+        templateRepository.findById(id).orElseThrow(() -> new TemplateNotFoundException(id));
         templateRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }

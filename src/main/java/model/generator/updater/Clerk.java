@@ -71,7 +71,7 @@ public class Clerk extends Generator {
                 LocalTime timeOfApp = template.getStartTime();
                 ZonedDateTime datetimeOfApp = ZonedDateTime.of(dateOfApp, timeOfApp, super.getOffice().getOffice_zoneId());
                 String name = datetimeOfApp.format(DateTimeFormatter.ofPattern("HH:mm, EEEE dd.MM.uuuu"));
-                appointments.add(new Appointment(name, datetimeOfApp, false));
+                appointments.add(new Appointment(name, datetimeOfApp, false, null));
                 System.out.println("LOG: appointment created:\nname: " + name);
             }
         }

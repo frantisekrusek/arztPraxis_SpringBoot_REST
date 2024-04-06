@@ -2,26 +2,35 @@ package model.appointment;
 
 import jakarta.persistence.*;
 import model.person.patient.Patient;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 @Entity
-public class Appointment implements Comparable {
+@NamedEntityGraph(name = "graph.Appointment.patient",
+        attributeNodes = @NamedAttributeNode("patient"))
+public class Appointment implements Comparable, Serializable {
     //name wird verwendet, um das Zeitfenster näher zu beschreiben.
     private String name;
     private ZonedDateTime dateTime;
     private boolean taken;
-    @OneToOne
+
+    @ManyToOne//(fetch = FetchType.LAZY)
+    @JoinColumn(name="patient_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Patient patient;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     //ctr
-    public Appointment(String name, ZonedDateTime dateTime, boolean taken) {
+    public Appointment(String name, ZonedDateTime dateTime, boolean taken, Patient patient) {
         this.name = name;
         this.dateTime = dateTime;
         this.taken = taken;
+        this.patient = patient;
     }
 
     public Appointment() {
@@ -58,6 +67,12 @@ public class Appointment implements Comparable {
         this.patient = patient;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {this.id = id;}
+
     @Override
     public int compareTo(Object o) {
         Appointment appointment = (Appointment)o;
@@ -89,7 +104,13 @@ public class Appointment implements Comparable {
     }
 
     @Override
-    public String toString(){
-        return name + "\n";
+    public String toString() {
+        return "Appointment{" +
+                "name='" + name + '\'' +
+                ", dateTime=" + dateTime +
+                ", taken=" + taken +
+                ", patient=" + patient +
+                ", id=" + id +
+                '}';
     }
 }//end class

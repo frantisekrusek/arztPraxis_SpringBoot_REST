@@ -48,7 +48,7 @@ public class Generator {
 
             String name = zdt.format(DateTimeFormatter.ofPattern("HH:mm, EEEE dd.MM.uuuu"));
 
-            Appointment appointment = new Appointment(name, zdt, false);
+            Appointment appointment = new Appointment(name, zdt, false, null);
             appointments.add(appointment);
             System.out.println("LOG: appointment created:\nname: " + appointment.getName());
         }
