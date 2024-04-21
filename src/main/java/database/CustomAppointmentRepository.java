@@ -1,6 +1,6 @@
 package database;
 
-import model.appointment.Appointment;
+import model.Appointment;
 
 public interface CustomAppointmentRepository {
 

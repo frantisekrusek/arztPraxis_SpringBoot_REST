@@ -2,10 +2,7 @@ package assembler;
 
 import controller.AppointmentController;
 import controller.PatientController;
-import controller.TemplateController;
-import model.appointment.Appointment;
-import model.appointment.Template;
-import model.person.patient.Patient;
+import model.Patient;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;

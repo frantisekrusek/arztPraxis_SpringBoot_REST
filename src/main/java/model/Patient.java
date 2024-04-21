@@ -1,10 +1,7 @@
-package model.person.patient;
+package model;
 
 import jakarta.persistence.*;
-import model.appointment.Appointment;
-import model.person.Person;
-
-import java.util.Set;
+import model.Person;
 
 @Entity
 public class Patient extends Person {

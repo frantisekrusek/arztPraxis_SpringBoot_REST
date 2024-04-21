@@ -1,6 +1,6 @@
 package database;
 
-import model.appointment.Appointment;
+import model.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

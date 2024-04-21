@@ -5,9 +5,7 @@ import database.AppointmentRepository;
 import database.PatientRepository;
 import exceptions.AppointmentNotFoundException;
 import exceptions.PatientNotFoundException;
-import exceptions.TemplateNotFoundException;
-import model.appointment.Appointment;
-import model.appointment.Template;
+import model.Appointment;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
@@ -117,7 +115,7 @@ public class AppointmentController {
                 Appointment updatedAppointment = appointmentRepository.findById(appointmentId)
                 .map(appointment -> {
                     appointment.setPatient(patientRepository.findById(patientId).
-                            orElseThrow());
+                            orElseThrow(() -> new PatientNotFoundException(patientId)));
                     appointment.setTaken(true);
                     return appointmentRepository.save(appointment);
                 }).orElseThrow();
@@ -130,7 +128,7 @@ public class AppointmentController {
     }
 
     @DeleteMapping("/appointments/{id}/cancel")
-    ResponseEntity<?> cancelAppointment(@PathVariable Long id) {
+    public ResponseEntity<?> cancelAppointment(@PathVariable Long id) {
 
         Appointment appointment = appointmentRepository.findById(id) //
                 .orElseThrow(() -> new AppointmentNotFoundException(id));

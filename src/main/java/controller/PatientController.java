@@ -1,15 +1,12 @@
 package controller;
 
-import assembler.AppointmentModelAssembler;
 import assembler.PatientModelAssembler;
 import database.AppointmentRepository;
 import database.PatientRepository;
 import exceptions.AppointmentNotFoundException;
 import exceptions.PatientNotFoundException;
-import exceptions.TemplateNotFoundException;
-import model.appointment.Appointment;
-import model.appointment.Template;
-import model.person.patient.Patient;
+import model.Appointment;
+import model.Patient;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;

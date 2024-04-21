@@ -1,4 +1,4 @@
-package model.person;
+package model;
 
 import jakarta.persistence.MappedSuperclass;
 

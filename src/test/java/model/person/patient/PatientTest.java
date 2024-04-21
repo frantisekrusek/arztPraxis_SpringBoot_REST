@@ -2,7 +2,8 @@ package model.person.patient;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import model.appointment.Appointment;
+import model.Appointment;
+import model.Patient;
 import org.junit.jupiter.api.Test;
 
 import java.time.ZonedDateTime;
@@ -15,7 +16,7 @@ public class PatientTest {
         Patient patient = new Patient("0123", "firstname", "surname");
         ZonedDateTime datetime = ZonedDateTime.now();
         String name = datetime.format(DateTimeFormatter.ofPattern("hh:mm, EEEE dd.MM.uuuu"));
-        Appointment appointment = new Appointment(name, datetime, false);
+        Appointment appointment = new Appointment(name, datetime, false, null);
         patient.makeAppointment(appointment);
 
         //hat p a?

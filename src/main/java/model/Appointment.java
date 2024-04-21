@@ -1,7 +1,6 @@
-package model.appointment;
+package model;
 
 import jakarta.persistence.*;
-import model.person.patient.Patient;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -16,6 +15,8 @@ public class Appointment implements Comparable, Serializable {
     private String name;
     private ZonedDateTime dateTime;
     private boolean taken;
+
+    private boolean archived;
 
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name="patient_id")
@@ -72,6 +73,14 @@ public class Appointment implements Comparable, Serializable {
     }
 
     public void setId(Long id) {this.id = id;}
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
 
     @Override
     public int compareTo(Object o) {

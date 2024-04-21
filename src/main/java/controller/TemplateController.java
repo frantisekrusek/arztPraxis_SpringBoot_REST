@@ -3,7 +3,7 @@ package controller;
 import assembler.TemplateModelAssembler;
 import database.TemplateRepository;
 import exceptions.TemplateNotFoundException;
-import model.appointment.Template;
+import model.Template;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;

@@ -2,13 +2,13 @@ package model.person.officeManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import model.appointment.Template;
-import model.generator.updater.Clerk;
-import model.office.Office;
-import model.person.officeManager.OfficeManager;
+import model.Template;
+import service.Clerk;
+import service.Office;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import service.OfficeManager;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;

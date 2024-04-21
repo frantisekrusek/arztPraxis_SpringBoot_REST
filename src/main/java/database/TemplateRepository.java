@@ -1,8 +1,7 @@
 package database;
 
-import model.appointment.Template;
+import model.Template;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import java.time.DayOfWeek;
 import java.util.Set;

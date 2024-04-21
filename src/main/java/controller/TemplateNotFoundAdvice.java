@@ -1,8 +1,6 @@
 package controller;
 
-import exceptions.AppointmentNotFoundException;
 import exceptions.TemplateNotFoundException;
-import model.appointment.Template;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

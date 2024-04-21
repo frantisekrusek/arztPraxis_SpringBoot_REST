@@ -1,17 +1,18 @@
 package model.generator.updater;
 
-import model.appointment.Appointment;
-import model.appointment.Template;
-import model.generator.Generator;
-import model.generator.Supervisor;
-import model.office.Office;
-import model.person.officeManager.OfficeManager;
+import model.Appointment;
+import model.Template;
+import service.Generator;
+import model.Supervisor;
+import service.Office;
+import service.OfficeManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import service.Clerk;
 
 
 import java.time.*;
@@ -78,8 +79,8 @@ class ClerkTest {
         generator.setOffice(new Office((Clerk)generator,new OfficeManager()));
         assertEquals(0, generator.getOffice().getAppointments().size(),
                 "Set of Appointments is not empty");
-        ((Clerk) generator).unleashTemplates(set1);
-        ((Clerk) generator).unleashTemplates(set2);
+        ((Clerk) generator).initSchedule(set1);
+        ((Clerk) generator).initSchedule(set2);
         assertEquals(1, generator.getOffice().getAppointments().size(),
                 "Set of Appointments in office has wrong size");
     }

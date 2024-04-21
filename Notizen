@@ -9,5 +9,40 @@ spring.h2.console.enabled=true
     springuser
     ThePassword
 
+-----------------
+in Anlehnung an:
+https://spring.io/guides/tutorials/rest
+https://www.bezkoder.com/jpa-one-to-many
 
+-----------------
+Difference LocalTime in Vienna/Austria to Instant(UTC):
++1h Winterzeit
++2h Sommerzeit !!
+
+-----------------
+Business logic:
+
+BusinessLogicConfig.startBusinessLogic()
+
+A) Initialize the schedule:
+(erstellt Appointments anhand von Templates, die in der Datenbank bereits bestehen.)
+->initSchedule()
+    ->generator.generateAppsFromSingleTemplate_andRepeatByWeeks()
+
+B) Catch up with the schedule
+->clerk.catchUp()
+
+
+C) Set a Timer with a task.
+->timer.scheduleAtFixedRate(new Task(...)
+    ->Task.run()
+    ->clerk.generateAppsOfDay()
+    ->clerk.moveCursorOfLastUpdatedTemplate()
+
+-----------------
+Wann und wo (Applikation oder Datenbank) wird zum ersten Mal lastUpdate gesetzt?
+Stand 14.04.2024
+BusinessLogicConfig.initDatabase() ruft supervisorRepository.save(Supervisor.getInstance()); .
+Bei Aufruf von getLastUpdate() wird IN DER APPLIKATION zum ersten Mal lastUpdate gesetzt (auf heute 0h),
+unter der Bedingung lastUpdate = null. In der Folge wird dieser Wert in der Datenbank gespeichert.
 

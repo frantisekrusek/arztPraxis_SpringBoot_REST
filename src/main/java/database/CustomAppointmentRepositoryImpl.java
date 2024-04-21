@@ -3,7 +3,7 @@ package database;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import model.appointment.Appointment;
+import model.Appointment;
 
 import java.util.HashMap;
 import java.util.Map;

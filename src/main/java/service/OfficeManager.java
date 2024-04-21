@@ -1,16 +1,15 @@
-package model.person.officeManager;
+package service;
 
 import database.TemplateRepository;
-import model.appointment.Template;
-import model.office.Office;
-import model.person.Person;
-import org.springframework.web.bind.annotation.RestController;
+import model.Template;
+import org.springframework.stereotype.Service;
+import model.Person;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Set;
 
-@RestController
+@Service
 public class OfficeManager extends Person {
 
     TemplateRepository templateRepository;
@@ -41,7 +40,7 @@ public class OfficeManager extends Person {
         }
 
     /*
-    Method prevents creating duplicate.
+    Method prevents duplicates from being created.
     Templates are categorized by Weekday - preparation for automated day-by-day appointment creation.
      */
     public boolean categorizeTemplate(Template template){

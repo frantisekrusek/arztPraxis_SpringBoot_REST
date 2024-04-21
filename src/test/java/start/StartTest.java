@@ -1,10 +1,10 @@
 package start;
 
-import model.appointment.Template;
-import model.generator.Supervisor;
-import model.generator.updater.Clerk;
-import model.office.Office;
-import model.person.officeManager.OfficeManager;
+import model.Template;
+import model.Supervisor;
+import service.Clerk;
+import service.Office;
+import service.OfficeManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,6 +29,8 @@ class StartTest {
     Clerk clerk;
     Office office;
     OfficeManager officeManager = new OfficeManager();
+
+
 
 
     @BeforeEach
@@ -76,7 +78,7 @@ class StartTest {
     void simulation1(){
         clerk.setWeeks(3);
         int before = clerk.getOffice().getAppointments().size();
-        clerk.unleashTemplates(office.getTemplates());
+        clerk.initSchedule(office.getTemplates());
         //Ergebnisse
         System.out.println(clerk.sortAppointments());
         int after = clerk.getOffice().getAppointments().size();

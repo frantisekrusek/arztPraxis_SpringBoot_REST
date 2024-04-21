@@ -1,4 +1,4 @@
-package model.appointment;
+package model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
@@ -8,7 +8,6 @@ import jakarta.persistence.Id;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.Comparator;
 
 @Entity
 public class Template {

@@ -1,7 +1,7 @@
 package assembler;
 
 import controller.TemplateController;
-import model.appointment.Template;
+import model.Template;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
